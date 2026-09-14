@@ -7,15 +7,15 @@
 :root{
   /* ---- ground ---- */
   --canvas:#ffffff;
-  --paper:#f4f8fc;
-  --paper-2:#eaf2fa;
-  --elevated:#eef4fa;
+  --paper:#edf3fa;
+  --paper-2:#e2ecf7;
+  --elevated:#e5eef8;
 
   /* ---- ink (all AA on canvas) ---- */
   --ink:#08101f;
   --body:#3c4a61;
-  --muted:#5a6b85;
-  --dim:#6e7d95;
+  --muted:#4f6079;
+  --dim:#64738c;
 
   /* ---- signal ---- */
   --signal:#0284c7;
@@ -30,13 +30,14 @@
   --grid:#e7edf4;
   --baseline:#94a3b8;
 
-  --hair:rgba(8,16,31,.09);
-  --hair-2:rgba(8,16,31,.14);
+  --hair:rgba(8,16,31,.14);
+  --hair-2:rgba(8,16,31,.2);
 
   /* ---- type ---- */
-  /* Fraunces carries the large display type only; it gets cramped and odd on
-     small headings and numerals, so those stay on the sans. */
-  --f-serif:'Fraunces',Georgia,'Times New Roman',serif;
+  /* A serif with open counters and even stroke weight, so it stays readable
+     down to quote size. It carries display type only; small headings and
+     numerals stay on the sans. */
+  --f-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
   --f-display:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
   --f-sans:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
   --f-mono:'IBM Plex Mono',ui-monospace,monospace;
@@ -63,10 +64,13 @@
   --r-lg:1.35rem;
   --r-xl:2rem;
 
-  --lift:0 1px 2px rgba(8,16,31,.05),0 10px 30px -12px rgba(2,132,199,.28);
-  --lift-lg:0 1px 2px rgba(8,16,31,.06),0 18px 48px -16px rgba(2,132,199,.34);
-  --lift-plain:0 1px 2px rgba(8,16,31,.05),0 24px 60px -24px rgba(8,16,31,.26);
+  --lift:0 1px 2px rgba(8,16,31,.07),0 4px 10px -3px rgba(8,16,31,.06),0 14px 34px -14px rgba(2,132,199,.34);
+  --lift-lg:0 1px 2px rgba(8,16,31,.08),0 6px 14px -4px rgba(8,16,31,.07),0 22px 52px -18px rgba(2,132,199,.4);
+  --lift-plain:0 1px 2px rgba(8,16,31,.07),0 4px 10px -3px rgba(8,16,31,.06),0 22px 50px -22px rgba(8,16,31,.3);
   --lift-hard:0 2px 4px rgba(8,16,31,.06),0 34px 70px -28px rgba(8,16,31,.38);
+
+  /* every card-like surface gets this at rest so nothing floats flat */
+  --rest:0 1px 2px rgba(8,16,31,.06),0 3px 8px -2px rgba(8,16,31,.05);
 
   --ease:cubic-bezier(.22,1,.36,1);
 }
@@ -169,7 +173,7 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 
 .lead{
   margin:1.5rem 0 0;
-  max-width:34rem;
+  max-width:42rem;
   font-size:var(--t-lead);
   line-height:1.68;
   color:var(--muted);
@@ -475,7 +479,7 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .tick{
   display:grid;place-items:center;flex:none;
   width:24px;height:24px;border-radius:99px;
-  background:var(--ink);color:#fff;margin-top:.05rem;
+  background:var(--signal);color:#fff;margin-top:.05rem;
 }
 .tick .ico{width:13px;height:13px;stroke-width:3}
 
@@ -637,7 +641,8 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 
 .fig:hover,.fig:focus-visible,.fig.is-on{background:linear-gradient(180deg,var(--signal-soft),rgba(226,242,253,.25))}
 .fig:hover .fig__bar,.fig:focus-visible .fig__bar,.fig.is-on .fig__bar{transform:scaleX(1)}
-.fig:hover .fig__ico,.fig:focus-visible .fig__ico,.fig.is-on .fig__ico{background:var(--ink);color:#fff;transform:translateY(-3px)}
+/* colour handled in the dark-band block below; this keeps only the lift */
+.fig:hover .fig__ico,.fig:focus-visible .fig__ico,.fig.is-on .fig__ico{transform:translateY(-3px)}
 .fig:hover .fig__v,.fig:focus-visible .fig__v,.fig.is-on .fig__v{color:var(--signal-deep)}
 .fig:hover .fig__d,.fig:focus-visible .fig__d,.fig.is-on .fig__d{opacity:1;transform:translateY(0)}
 
@@ -705,7 +710,9 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .svc__head{display:flex;align-items:flex-start;gap:1.1rem}
 .svc__badge{
   display:grid;place-items:center;flex:none;width:58px;height:58px;
-  border-radius:var(--r-sm);background:var(--ink);color:var(--signal);
+  border-radius:var(--r-sm);
+  background:var(--signal-soft);color:var(--signal-deep);
+  border:1px solid rgba(2,132,199,.22);
 }
 .svc__badge .ico{width:25px;height:25px}
 .svc__kicker{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.12em;color:var(--dim)}
@@ -941,55 +948,30 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .kicker::after{background:linear-gradient(90deg,var(--hair-2),transparent)}
 
 /* ---------------- trusted by ---------------- */
-
-.trust__grid{
-  margin-top:2.75rem;
-  display:grid;grid-template-columns:repeat(2,1fr);
-  border:1px solid var(--hair);border-radius:var(--r-lg);
-  overflow:hidden;background:#fff;
-}
-/* 10 brands divide evenly by 2 and 5 only — a 3-col step would orphan one cell */
-@media (min-width:760px){.trust__grid{grid-template-columns:repeat(5,1fr)}}
-
-.tcell{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;
-  min-height:124px;padding:1.25rem .9rem;text-align:center;
-  border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);
-  transition:background-color .35s var(--ease);
-}
-/* 2 columns: strip the right edge on every 2nd cell and the final row */
-.tcell:nth-child(2n){border-right:0}
-.tcell:nth-last-child(-n+2){border-bottom:0}
-
-@media (min-width:760px){
-  /* 5 columns: restore the 2n edges, strip every 5th and the final row */
-  .tcell:nth-child(2n){border-right:1px solid var(--hair)}
-  .tcell:nth-child(5n){border-right:0}
-  .tcell:nth-last-child(-n+2){border-bottom:1px solid var(--hair)}
-  .tcell:nth-last-child(-n+5){border-bottom:0}
+.trust__wrap{
+  margin-top:2.75rem;padding:clamp(1.75rem,4vw,2.75rem) clamp(1rem,3vw,2rem);
+  border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff;
 }
 
-.tcell__mark{
-  display:flex;align-items:center;gap:.5rem;
-  font-family:var(--f-display);font-size:1.02rem;font-weight:700;
-  letter-spacing:-.02em;color:var(--muted);
-  transition:color .3s;
+/* A centred wrap rather than a fixed lattice: the logo count will change over
+   time, and a partial last row reads as deliberate here instead of broken. */
+.logos{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(1.4rem,3vw,2.25rem) clamp(1.5rem,3vw,2.5rem);
 }
-.tcell__mark svg{width:19px;height:19px;flex:none;color:var(--dim);transition:color .3s,transform .45s var(--ease)}
+.logos li{display:flex;align-items:center;justify-content:center}
 
-.tcell__stat{
-  font-size:.58rem;letter-spacing:.09em;color:var(--signal-deep);
-  line-height:1.4;
+.logos img{
+  display:block;width:clamp(92px,9.4vw,120px);height:auto;
+  /* the set is visually noisy in full colour; desaturating unifies it and
+     lets an individual mark come forward on hover */
+  filter:grayscale(1);opacity:.72;
+  transition:filter .35s var(--ease),opacity .35s var(--ease),transform .35s var(--ease);
 }
+.logos li:hover img{filter:grayscale(0);opacity:1;transform:translateY(-2px)}
 
-/* On touch the metric simply stays put; only pointer devices get the reveal. */
-@media (hover:hover){
-  .tcell__stat{opacity:0;transform:translateY(5px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
-  .tcell:hover .tcell__stat{opacity:1;transform:none}
-}
-.tcell:hover{background:linear-gradient(180deg,var(--signal-soft),rgba(226,242,253,.25))}
-.tcell:hover .tcell__mark{color:var(--ink)}
-.tcell:hover .tcell__mark svg{color:var(--signal);transform:rotate(90deg)}
+@media (prefers-reduced-motion:reduce){.logos img{transition:none}}
+@media (prefers-contrast:more){.logos img{filter:none;opacity:1}}
 
 /* ---------------- featured on ---------------- */
 
@@ -1355,8 +1337,15 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .card:hover{transform:translateY(-4px);border-color:var(--signal);box-shadow:var(--lift)}
 .card__ico{
   display:grid;place-items:center;width:48px;height:48px;margin-bottom:1.25rem;
-  border-radius:var(--r-sm);background:var(--ink);color:var(--signal);
+  border-radius:var(--r-sm);
+  /* A solid ink square is blunt in a light layout, and signal blue on it is
+     only 3.94:1 so the glyph goes muddy. A tinted tile is lighter and the
+     deeper blue reads cleanly. */
+  background:var(--signal-soft);color:var(--signal-deep);
+  border:1px solid rgba(2,132,199,.22);
+  transition:background-color .3s,color .3s,border-color .3s;
 }
+.card:hover .card__ico{background:var(--signal);color:#fff;border-color:var(--signal)}
 .card__ico .ico{width:21px;height:21px}
 .card__h{margin:0;font-family:var(--f-display);font-size:1.15rem;font-weight:700;letter-spacing:-.02em;color:var(--ink)}
 .card__b{margin:.75rem 0 0;font-size:var(--t-sm);line-height:1.7;color:var(--muted)}
@@ -1518,7 +1507,204 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .h1,.h2,.phero__h,.cta__h,.srow__h,.appr__h,.order__title,.svc__title,.quote__b{
   font-family:var(--f-serif);
   font-optical-sizing:auto;
-  letter-spacing:-.012em;
+  letter-spacing:-.004em;
 }
 .h1{line-height:1.02}
 .h2,.phero__h,.cta__h{line-height:1.1}
+
+/* ---------- image slots ---------- */
+.shot{
+  position:relative;display:block;margin:0;overflow:hidden;
+  border-radius:var(--r-lg);border:1px solid var(--hair);
+  background:var(--paper);box-shadow:var(--lift-plain);
+}
+.shot img{display:block;width:100%;height:100%;object-fit:cover}
+.shot--wide{aspect-ratio:16/9}
+
+/* the media column becomes a bare stack once it holds an image, so the
+   figure's own frame is not doubled by the panel's */
+.srow__media--img{border:0;background:none;padding:0;box-shadow:none}
+
+.shotstats{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  margin-top:1.15rem;background:var(--hair);
+  border:1px solid var(--hair);border-radius:var(--r-sm);overflow:hidden;
+}
+@media (min-width:520px){.shotstats{grid-template-columns:repeat(4,1fr)}}
+.shotstats div{background:#fff;padding:.9rem .8rem;min-width:0}
+.shotstats dt{font-family:var(--f-mono);font-size:.54rem;letter-spacing:.09em;color:var(--dim);line-height:1.35}
+.shotstats dd{margin:.4rem 0 0;font-family:var(--f-display);font-size:1.15rem;font-weight:700;line-height:1;color:var(--ink)}
+.shotnote{margin:.85rem 0 0;font-family:var(--f-mono);font-size:.64rem;color:var(--dim)}
+
+/* ============================== TESTIMONIAL MARQUEE ============================== */
+
+.tmarq{position:relative;overflow:hidden;margin-top:clamp(2rem,4vw,3rem); padding: 20px}
+
+/* Two tracks running opposite ways reads richer than one, and makes the
+   duplicated content far less obvious than a single loop. */
+.tmarq__row{display:flex;gap:1.15rem;width:max-content}
+.tmarq__row + .tmarq__row{margin-top:1.15rem}
+.tmarq__row--a{animation:tmarqA 64s linear infinite}
+.tmarq__row--b{animation:tmarqB 78s linear infinite}
+.tmarq:hover .tmarq__row{animation-play-state:paused}
+
+@keyframes tmarqA{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tmarqB{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+/* Static, wrapped and single-row when motion is unwelcome */
+@media (prefers-reduced-motion:reduce){
+  .tmarq__row{animation:none;width:auto;flex-wrap:wrap;justify-content:center}
+  .tmarq__row--b{display:none}
+}
+
+.tmarq__fade{position:absolute;inset-block:0;width:clamp(48px,9vw,140px);z-index:2;pointer-events:none}
+.tmarq__fade--l{left:0;background:linear-gradient(90deg,var(--canvas) 12%,transparent)}
+.tmarq__fade--r{right:0;background:linear-gradient(270deg,var(--canvas) 12%,transparent)}
+
+.tcard{
+  flex:none;width:min(392px,84vw);
+  display:flex;flex-direction:column;
+  padding:1.6rem;border:1px solid var(--hair);border-radius:var(--r-lg);
+  background:#fff;box-shadow:0 1px 2px rgba(8,16,31,.045);
+  transition:border-color .3s,box-shadow .3s var(--ease),transform .3s var(--ease);
+}
+.tcard:hover{border-color:var(--signal);box-shadow:var(--lift);transform:translateY(-3px)}
+
+.tcard__q{
+  margin:0;font-family:var(--f-serif);font-optical-sizing:auto;
+  font-size:1.03rem;line-height:1.6;letter-spacing:0;color:var(--ink);
+
+  /* Reviews will vary in length. Reserving a fixed number of lines - a floor
+     via min-height and a ceiling via line-clamp - makes every card exactly the
+     same height, so the two marquee rows can never drift apart. The em units
+     track the font-size, so this holds if the type scale changes. */
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:5;
+  line-clamp:5;
+  overflow:hidden;
+  min-height:calc(5 * 1.6em);
+}
+/* Cards are wider on desktop, so the same words need fewer lines */
+@media (min-width:700px){
+  .tcard__q{-webkit-line-clamp:4;line-clamp:4;min-height:calc(4 * 1.6em)}
+}
+.tcard__q::before{content:"\201C"}
+.tcard__q::after{content:"\201D"}
+
+.tcard__who{display:flex;align-items:center;gap:.8rem;margin-top:auto;padding-top:1.35rem}
+.tcard__av{
+  flex:none;width:46px;height:46px;border-radius:99px;overflow:hidden;
+  border:1px solid var(--hair);background:var(--signal-soft);
+}
+.tcard__av img{display:block;width:100%;height:100%;object-fit:cover}
+/* Role lines vary a lot ("Market Cube" vs "Founder & CEO, Collab Management
+   Group"). Reserving two lines keeps the attribution block a constant height,
+   so cards stay level whatever the job title says. */
+.tcard__n{
+  margin:0;font-size:.86rem;font-weight:600;color:var(--ink);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.tcard__r{
+  margin:.12rem 0 0;font-size:.74rem;line-height:1.4;color:var(--muted);
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;
+  overflow:hidden;min-height:calc(2 * 1.4em);
+}
+.tcard__who>span:last-child{min-width:0}
+
+/* ============================== WORK SHOWCASE ============================== */
+
+.work__grid{display:grid;gap:1.25rem;grid-template-columns:1fr;margin-top:clamp(2rem,4vw,3rem)}
+@media (min-width:680px){.work__grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1040px){.work__grid{grid-template-columns:repeat(3,1fr)}}
+.work__grid>*{min-width:0}
+
+.wtile{
+  display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.wtile:hover{transform:translateY(-4px);border-color:var(--signal);box-shadow:var(--lift)}
+.wtile .shot{border:0;border-radius:0;border-bottom:1px solid var(--hair);box-shadow:none}
+.wtile .shot img{transition:transform .6s var(--ease)}
+.wtile:hover .shot img{transform:scale(1.04)}
+
+.wtile__body{display:flex;flex-direction:column;flex:1;padding:1.35rem}
+.wtile__meta{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.wtile__cat{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.wtile__dr{
+  flex:none;padding:.22rem .5rem;border-radius:.4rem;
+  background:var(--signal-soft);color:var(--signal-deep);
+  font-family:var(--f-mono);font-size:.56rem;letter-spacing:.06em;white-space:nowrap;
+}
+.wtile:hover .wtile__dr{background:var(--signal);color:#fff}
+.wtile__h{
+  margin:.8rem 0 0;font-family:var(--f-serif);font-optical-sizing:auto;
+  font-size:1.18rem;font-weight:600;line-height:1.3;letter-spacing:-.004em;color:var(--ink);
+}
+.wtile__r{
+  display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin:auto 0 0;padding-top:1.15rem;
+  font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;color:var(--gain);
+}
+.wtile__r span{white-space:nowrap}
+
+.work__foot{display:flex;justify-content:center;margin-top:clamp(2rem,4vw,2.75rem)}
+
+/* ---------- contrast pass ----------
+   Card-like surfaces were white-on-white with a near-invisible border, so the
+   page read as one flat field. A resting shadow plus a stronger hairline gives
+   every block an edge without adding visual noise. */
+.card,.tier,.case,.wtile,.tcard,.person,.cbox,.cform,
+.trust__wrap,.figures,.tblwrap,.svc__panel,.appr__figure,.order,.dash{
+  box-shadow:var(--rest);
+}
+.qa__sign{border-color:var(--hair-2)}
+
+/* Kickers were small grey mono on pale ground and disappeared. Colour gives
+   each section head an anchor. */
+.kicker{color:var(--signal-deep);font-weight:500}
+.kicker::before,.kicker::after{opacity:.9}
+
+/* The logo wall was the most literally faded thing on the page */
+.logos img{filter:grayscale(.92);opacity:.88}
+.logos li:hover img{filter:grayscale(0);opacity:1}
+
+/* ---------- figures: the page's dark anchor ----------
+   A long all-light scroll has no rhythm and reads flat however strong the
+   individual blocks are. One inverted band mid-page fixes that, and echoes
+   the footer so it belongs to the palette rather than fighting it. */
+.figures{
+  background:var(--ink);
+  border-color:transparent;
+  box-shadow:0 2px 6px rgba(8,16,31,.1),0 26px 56px -24px rgba(8,16,31,.55);
+}
+.fig{border-color:rgba(255,255,255,.11)}
+.fig__ico{background:rgba(255,255,255,.07);color:var(--signal)}
+.fig__v{color:#fff;font-size:clamp(2.15rem,4vw,3rem)}
+.fig__l{color:rgba(255,255,255,.62)}
+.fig__d{color:#7fd4ff}
+
+.fig:hover,.fig:focus-visible,.fig.is-on{background:rgba(255,255,255,.055)}
+.fig:hover .fig__ico,.fig:focus-visible .fig__ico,.fig.is-on .fig__ico{background:var(--signal);color:#fff}
+.fig:hover .fig__v,.fig:focus-visible .fig__v,.fig.is-on .fig__v{color:#fff}
+.fig:hover .fig__l,.fig:focus-visible .fig__l,.fig.is-on .fig__l{color:rgba(255,255,255,.8)}
+.figures :focus-visible{outline-color:#7fd4ff}
+
+/* Case-study assets are transparent subject shots, not photographs that can be
+   cropped. Contain them on a tinted ground instead of cover-cropping. */
+.shot--contain{
+  display:grid;place-items:center;padding:1.15rem;
+  background:linear-gradient(155deg,var(--paper),var(--elevated));
+}
+.shot--contain img{width:100%;height:100%;object-fit:contain}
+
+/* On the ink band, signal blue sits at 3.94:1 and reads muddy. The lighter
+   cyan already used for the delta line clears 11:1 on the same ground. */
+.fig__ico{
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.13);
+  color:#7fd4ff;
+}
+.fig:hover .fig__ico,.fig:focus-visible .fig__ico,.fig.is-on .fig__ico{
+  background:var(--signal);border-color:var(--signal);color:#fff;
+}

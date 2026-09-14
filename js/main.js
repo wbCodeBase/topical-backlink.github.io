@@ -1031,6 +1031,23 @@
     });
   }
 
+  /* ----------------------------- TESTIMONIAL MARQUEE ----------------------------- */
+  function initTmarq() {
+    var host = $("#tmarq");
+    if (!host) return;
+    // The rows translate by -50%, so each needs its content duplicated for the
+    // loop to be seamless. The clone is decorative only.
+    $$(".tmarq__row", host).forEach(function (row) {
+      var clone = row.cloneNode(true);
+      while (clone.firstChild) {
+        var node = clone.firstChild;
+        clone.removeChild(node);
+        if (node.nodeType === 1) node.setAttribute("aria-hidden", "true");
+        row.appendChild(node);
+      }
+    });
+  }
+
   /* ----------------------------- boot ----------------------------- */
   // One failing section must not take the rest of the page down with it.
   function safe(name, fn) {
@@ -1049,6 +1066,7 @@
     safe("approach", initApproach);
     safe("order", initOrder);
     safe("swoosh", initSwoosh);
+    safe("tmarq", initTmarq);
     safe("faq", initFaq);
     safe("audit", initAudit);
     safe("lead", initLead);
