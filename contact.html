@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact &mdash; TopicalBacklink</title>
+<meta name="description" content="Tell us your domain and get a free link-gap analysis within 72 hours. No contract, no minimum, no obligation.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================== NAV ============================== -->
+<header class="nav" id="nav">
+  <div class="nav__shell">
+    <a href="index.html" class="logo" aria-label="TopicalBacklink home">
+      <svg class="logo__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="lm" x1="0" y1="0" x2="40" y2="40">
+            <stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#7c3aed"/>
+          </linearGradient>
+          <radialGradient id="lmc">
+            <stop offset="0%" stop-color="#38bdf8"/><stop offset="50%" stop-color="#0284c7"/><stop offset="100%" stop-color="#075985"/>
+          </radialGradient>
+        </defs>
+        <circle cx="20" cy="20" r="18.5" stroke="url(#lm)" stroke-opacity=".3"/>
+        <g stroke="url(#lm)" stroke-width="1.5" stroke-linecap="round">
+          <path d="M20 20 L20 7"/><path d="M20 20 L8.7 26.5"/><path d="M20 20 L31.3 26.5"/>
+        </g>
+        <g fill="#fff" stroke="url(#lm)" stroke-width="1.7">
+          <circle cx="20" cy="7" r="3.2"/><circle cx="8.7" cy="26.5" r="3.2"/><circle cx="31.3" cy="26.5" r="3.2"/>
+        </g>
+        <circle cx="20" cy="20" r="4.6" fill="url(#lmc)"/>
+      </svg>
+      <span class="logo__word">Topical<span>Backlink</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Main">
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="case-studies.html">Case studies</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a href="contact.html" class="nav__signin">Contact</a>
+      <a href="contact.html" class="btn btn--primary">
+        Book a call
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+      </button>
+    </div>
+
+    <div class="nav__progress" id="navProgress"></div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__top">
+    <span class="logo__word">Topical<span>Backlink</span></span>
+    <button class="nav__burger" id="sheetClose" aria-label="Close menu">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <nav class="sheet__links" aria-label="Mobile">
+    <a href="services.html"><i>01</i>Services</a>
+    <a href="pricing.html"><i>02</i>Pricing</a>
+    <a href="case-studies.html"><i>03</i>Case studies</a>
+    <a href="about.html"><i>04</i>About</a>
+  </nav>
+  <div class="sheet__cta">
+    <a href="contact.html" class="btn btn--primary btn--lg btn--block">Book a call</a>
+    <a href="index.html" class="btn btn--ghost btn--lg btn--block">Home</a>
+  </div>
+</div>
+
+<main id="top">
+
+<section class="phero">
+  <div class="phero__wash" aria-hidden="true"></div>
+  <div class="shell phero__inner">
+  <p class="crumb"><a href="index.html">Home</a> <span>/</span> Contact</p>
+    <h1 class="phero__h" data-rise>Tell us the domain. <span class="mark">We'll map the gap.</span></h1>
+    <p class="phero__sub" data-rise>Every enquiry gets a free link-gap analysis within 72 hours &mdash; the competitors you are losing links to, and the specific placements that would close it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="cgrid">
+      <!-- NOTE: client-side only. Wire this POST to your CRM before launch. -->
+      <form class="cform" id="leadForm" novalidate data-rise>
+        <div class="frow">
+          <div class="field">
+            <label for="lfName">Your name</label>
+            <input id="lfName" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="lfEmail">Work email</label>
+            <input id="lfEmail" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label for="lfDomain">Domain to audit</label>
+            <input id="lfDomain" name="domain" type="text" inputmode="url" placeholder="yourdomain.com" required>
+          </div>
+          <div class="field">
+            <label for="lfType">What do you need?</label>
+            <select id="lfType" name="type">
+              <option>White-label link building</option>
+              <option>Multi-lingual link building</option>
+              <option>Local link building (USA)</option>
+              <option>Media placements</option>
+              <option>AI search optimization</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="lfMsg">Anything we should know?</label>
+          <textarea id="lfMsg" name="message" placeholder="Target pages, anchors to avoid, markets, current volume&hellip;"></textarea>
+        </div>
+        <button class="btn btn--primary btn--lg" type="submit" id="lfBtn">Request free link map <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+        <p class="cform__msg" id="lfMsg2" role="status" aria-live="polite" hidden></p>
+      </form>
+
+      <div class="cside" data-rise>
+        <div class="cbox" style="padding:0;overflow:hidden">
+          <figure class="ph ph--4x3">
+            <img src="images/ph-4x3.svg" alt="The TopicalBacklink outreach team" loading="lazy" width="1200" height="900">
+            <figcaption class="ph__cap">PLACEHOLDER &middot; 1200&times;900</figcaption>
+          </figure>
+        </div>
+        <div class="cbox">
+          <h3>Prefer to talk?</h3>
+          <p>Book a 30-minute call and we will screen-share the gap analysis live.
+            <a href="#">Pick a time &rarr;</a></p>
+        </div>
+        <div class="cbox">
+          <h3>Email us</h3>
+          <p><a href="mailto:hello@topicalbacklink.com">hello@topicalbacklink.com</a><br>
+            We reply within one business day.</p>
+        </div>
+        <div class="cbox">
+          <h3>Already a client?</h3>
+          <p>Your dashboard has live chat with your strategist.
+            <a href="#">Sign in &rarr;</a></p>
+        </div>
+        <div class="cbox">
+          <h3>What happens next</h3>
+          <p>1. We map your link graph against your three closest competitors.<br>
+            2. You get the gap analysis within 72 hours.<br>
+            3. If it is useful, we talk. If not, keep it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="shell narrow">
+    <div class="sec-head" data-rise>
+      <p class="kicker">Before you write</p>
+      <h2 class="h2">Quick answers</h2>
+    </div>
+    <div class="faq__list" data-rise>
+      <div class="qa is-open">
+        <button class="qa__q" type="button" aria-expanded="true">
+          <span>Is the link audit really free?</span><span class="qa__sign" aria-hidden="true"></span>
+        </button>
+        <div class="qa__panel"><div class="qa__a">Yes, and there is no obligation. You keep the
+          analysis whether or not you work with us &mdash; it is a real deliverable, not a sales deck.</div></div>
+      </div>
+      <div class="qa">
+        <button class="qa__q" type="button" aria-expanded="false">
+          <span>How quickly can we start?</span><span class="qa__sign" aria-hidden="true"></span>
+        </button>
+        <div class="qa__panel"><div class="qa__a">Gap analysis within 72 hours, outreach begins the
+          week after approval, and first placements typically go live in week three.</div></div>
+      </div>
+      <div class="qa">
+        <button class="qa__q" type="button" aria-expanded="false">
+          <span>Do you work with agencies only?</span><span class="qa__sign" aria-hidden="true"></span>
+        </button>
+        <div class="qa__panel"><div class="qa__a">Most of our volume is white-label for agencies,
+          but we work directly with in-house teams too. The process is identical.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <a href="index.html" class="logo logo--foot" aria-label="TopicalBacklink home">
+          <svg class="logo__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="lmf" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#a78bfa"/>
+              </linearGradient>
+              <radialGradient id="lmfc">
+                <stop offset="0%" stop-color="#ffffff"/><stop offset="55%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#0284c7"/>
+              </radialGradient>
+            </defs>
+            <circle cx="20" cy="20" r="18.5" stroke="url(#lmf)" stroke-opacity=".35"/>
+            <g stroke="url(#lmf)" stroke-width="1.5" stroke-linecap="round">
+              <path d="M20 20 L20 7"/><path d="M20 20 L8.7 26.5"/><path d="M20 20 L31.3 26.5"/>
+            </g>
+            <g fill="#08101f" stroke="url(#lmf)" stroke-width="1.7">
+              <circle cx="20" cy="7" r="3.2"/><circle cx="8.7" cy="26.5" r="3.2"/><circle cx="31.3" cy="26.5" r="3.2"/>
+            </g>
+            <circle cx="20" cy="20" r="4.6" fill="url(#lmfc)"/>
+          </svg>
+          <span class="logo__word">Topical<span>Backlink</span></span>
+        </a>
+
+        <p class="foot__blurb">
+          We map the link graph of your niche and build the exact edges that move
+          rankings &mdash; on real editorial sites, tracked live, guaranteed for
+          twelve months.
+        </p>
+
+        <ul class="foot__social">
+          <li><a href="#" aria-label="TopicalBacklink on X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7.6 10.2L4.4 20h1.9l6.1-6.6L17 20h3L12.1 9.3 18.8 4h-1.9l-5.7 6.1L7 4H4Z"/></svg>
+          </a></li>
+          <li><a href="#" aria-label="TopicalBacklink on LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 3.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 9.5h3V21H3V9.5Zm5.5 0h2.9v1.6h.1a3.2 3.2 0 0 1 2.9-1.6c3 0 3.6 2 3.6 4.6V21h-3v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-3V9.5Z"/></svg>
+          </a></li>
+          <li><a href="#" aria-label="TopicalBacklink on YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.2V8.8L15.5 12 10 15.2Z"/></svg>
+          </a></li>
+        </ul>
+      </div>
+
+      <nav class="foot__nav" aria-label="Footer">
+        <div class="foot__col">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="services.html#white-label">White-label links</a></li>
+            <li><a href="services.html#multi-lingual">Multi-lingual</a></li>
+            <li><a href="services.html#local">Local (USA)</a></li>
+            <li><a href="services.html#ai-search">AI search optimization</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="about.html">About us</a></li>
+            <li><a href="case-studies.html">Case studies</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="foot__col">
+          <h3>Start</h3>
+          <ul>
+            <li><a href="contact.html">Book a call</a></li>
+            <li><a href="index.html#audit">Free link audit</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__bar">
+      <p>&copy; <span id="yr">2026</span> TopicalBacklink. All rights reserved.</p>
+      <ul class="foot__legal">
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Link policy</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

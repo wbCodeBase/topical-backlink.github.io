@@ -983,6 +983,65 @@
     if (el) el.textContent = String(new Date().getFullYear());
   }
 
+  /* ----------------------------- LEAD FORM ----------------------------- */
+  function initLead() {
+    var form = $("#leadForm");
+    if (!form) return;
+    var btn = $("#lfBtn"), out = $("#lfMsg2");
+    var EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
+    var DOMAIN = /^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}$/i;
+
+    function fail(field, text) {
+      field.setAttribute("aria-invalid", "true");
+      out.textContent = text;
+      out.classList.add("is-err");
+      out.hidden = false;
+      field.focus();
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = $("#lfName"), email = $("#lfEmail"), dom = $("#lfDomain");
+      [name, email, dom].forEach(function (f) { f.removeAttribute("aria-invalid"); });
+
+      if (!name.value.trim()) return fail(name, "Tell us your name so we know who to reply to.");
+      if (!EMAIL.test(email.value.trim())) return fail(email, "That email address does not look right.");
+
+      var d = dom.value.trim().toLowerCase()
+        .replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/.*$/, "");
+      if (!DOMAIN.test(d)) return fail(dom, "Enter the domain you want audited, e.g. yourdomain.com");
+
+      btn.disabled = true;
+      out.classList.remove("is-err");
+      out.textContent = "Sending…";
+      out.hidden = false;
+
+      // No backend yet: confirms locally only. POST to your CRM here.
+      setTimeout(function () {
+        out.textContent = "Thanks — your link-gap analysis for " + d +
+          " is queued. We will email it within 72 hours.";
+        btn.disabled = false;
+        form.reset();
+      }, 900);
+    });
+
+    form.addEventListener("input", function (e) {
+      if (e.target && e.target.removeAttribute) e.target.removeAttribute("aria-invalid");
+      out.hidden = true;
+    });
+  }
+
+  /* ----------------------------- IMAGE PLACEHOLDERS ----------------------------- */
+  function initPlaceholders() {
+    // The "PLACEHOLDER" badge removes itself as soon as the src stops pointing
+    // at a ph-*.svg file, so swapping in a real photo needs no cleanup.
+    $$(".ph").forEach(function (fig) {
+      var img = $("img", fig), cap = $(".ph__cap", fig);
+      if (!img || !cap) return;
+      if (img.getAttribute("src").indexOf("/ph-") === -1) cap.hidden = true;
+    });
+  }
+
   /* ----------------------------- boot ----------------------------- */
   // One failing section must not take the rest of the page down with it.
   function safe(name, fn) {
@@ -1003,7 +1062,9 @@
     safe("swoosh", initSwoosh);
     safe("faq", initFaq);
     safe("audit", initAudit);
+    safe("lead", initLead);
     safe("year", initYear);
+    safe("placeholders", initPlaceholders);
     safe("reveals", initReveals);
     if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
   }
