@@ -1031,17 +1031,6 @@
     });
   }
 
-  /* ----------------------------- IMAGE PLACEHOLDERS ----------------------------- */
-  function initPlaceholders() {
-    // The "PLACEHOLDER" badge removes itself as soon as the src stops pointing
-    // at a ph-*.svg file, so swapping in a real photo needs no cleanup.
-    $$(".ph").forEach(function (fig) {
-      var img = $("img", fig), cap = $(".ph__cap", fig);
-      if (!img || !cap) return;
-      if (img.getAttribute("src").indexOf("/ph-") === -1) cap.hidden = true;
-    });
-  }
-
   /* ----------------------------- boot ----------------------------- */
   // One failing section must not take the rest of the page down with it.
   function safe(name, fn) {
@@ -1064,7 +1053,6 @@
     safe("audit", initAudit);
     safe("lead", initLead);
     safe("year", initYear);
-    safe("placeholders", initPlaceholders);
     safe("reveals", initReveals);
     if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
   }

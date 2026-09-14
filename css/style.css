@@ -34,9 +34,12 @@
   --hair-2:rgba(8,16,31,.14);
 
   /* ---- type ---- */
-  --f-display:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
-  --f-sans:'Inter',ui-sans-serif,system-ui,sans-serif;
-  --f-mono:'JetBrains Mono',ui-monospace,monospace;
+  /* Fraunces carries the large display type only; it gets cramped and odd on
+     small headings and numerals, so those stay on the sans. */
+  --f-serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --f-display:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
+  --f-sans:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
 
   /* fluid scale — one ratio, so nothing fights */
   --t-h1:clamp(2.9rem,5.6vw,4.35rem);
@@ -1508,94 +1511,14 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
 .nav__links a.is-here{color:var(--ink)}
 .nav__links a.is-here::after{transform:scaleX(1)}
 
-/* ============================== IMAGES ============================== */
-
-/* Aspect-ratio boxes so nothing shifts while photos load. Swap the src and
-   the layout stays identical. */
-.ph{
-  position:relative;display:block;margin:0;overflow:hidden;
-  border-radius:var(--r-lg);border:1px solid var(--hair);
-  background:var(--elevated);
+/* ---------- display type ----------
+   Serif is reserved for headings big enough to carry it. Everything smaller
+   (card titles, tier names, stat figures) stays on the sans, where the serif
+   reads cramped. Serifs also need far less negative tracking than a grotesque. */
+.h1,.h2,.phero__h,.cta__h,.srow__h,.appr__h,.order__title,.svc__title,.quote__b{
+  font-family:var(--f-serif);
+  font-optical-sizing:auto;
+  letter-spacing:-.012em;
 }
-.ph img{display:block;width:100%;height:100%;object-fit:cover}
-.ph--wide{aspect-ratio:16/9}
-.ph--4x3{aspect-ratio:4/3}
-.ph--sq{aspect-ratio:1/1}
-.ph--port{aspect-ratio:3/4}
-.ph--round{border-radius:99px}
-
-/* Auto-hidden by JS the moment the src stops being a ph-*.svg file */
-.ph__cap{
-  position:absolute;left:.6rem;bottom:.6rem;z-index:2;
-  padding:.3rem .55rem;border-radius:.4rem;
-  background:rgba(8,16,31,.74);color:#fff;
-  font-family:var(--f-mono);font-size:.55rem;letter-spacing:.09em;
-  pointer-events:none;
-}
-.ph__cap[hidden]{display:none}
-
-.ph--hover{transition:transform .5s var(--ease)}
-.ph--hover img{transition:transform .6s var(--ease)}
-a:hover .ph--hover img,.case:hover .ph--hover img,.card:hover .ph--hover img{transform:scale(1.04)}
-
-/* ---------- media panel: image with a stat strip beneath ---------- */
-.mediabox{
-  border:1px solid var(--hair);border-radius:var(--r-lg);background:var(--paper);
-  padding:1rem;box-shadow:var(--lift-plain);
-}
-.mediabox .ph{border-radius:calc(var(--r-lg) - .35rem)}
-.mediabox .mstat{margin-top:1rem}
-.mediabox .mnote{margin-top:.85rem}
-
-/* ---------- gallery strip ---------- */
-.gallery{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
-@media (min-width:760px){.gallery{grid-template-columns:repeat(3,1fr)}}
-.gallery>*{min-width:0}
-.gallery .ph{border-radius:var(--r-md)}
-/* first tile spans two columns for a less uniform, more editorial rhythm */
-@media (min-width:760px){
-  .gallery > :first-child{grid-column:span 2}
-  .gallery > :first-child.ph{aspect-ratio:2/1}
-}
-
-/* ---------- testimonials ---------- */
-.quotes{display:grid;gap:1.25rem;grid-template-columns:1fr}
-@media (min-width:760px){.quotes{grid-template-columns:repeat(3,1fr)}}
-.quotes>*{min-width:0}
-
-.quote{
-  display:flex;flex-direction:column;
-  padding:1.75rem;border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff;
-  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
-}
-.quote:hover{transform:translateY(-4px);border-color:var(--signal);box-shadow:var(--lift)}
-.quote__mark{font-family:var(--f-display);font-size:2.4rem;line-height:.7;color:var(--signal);opacity:.35}
-.quote__b{margin:.9rem 0 0;font-size:var(--t-sm);line-height:1.75;color:var(--body)}
-.quote__who{display:flex;align-items:center;gap:.85rem;margin-top:auto;padding-top:1.35rem;border-top:1px solid var(--hair)}
-.quote__av{flex:none;width:46px;height:46px}
-.quote__av .ph{border-radius:99px;width:46px;height:46px}
-.quote__av .ph__cap{display:none}
-.quote__n{margin:0;font-family:var(--f-display);font-size:.92rem;font-weight:700;color:var(--ink)}
-.quote__r{margin:.15rem 0 0;font-size:.74rem;color:var(--muted)}
-
-/* ---------- team portraits ---------- */
-.person__ph{margin:0 auto 1.15rem;width:100%;max-width:150px}
-.person__ph .ph{aspect-ratio:3/4;border-radius:var(--r-md)}
-.person__ph .ph__cap{display:none}
-
-/* ---------- case cover ---------- */
-.case__cover .ph{border-radius:0;border:0;border-bottom:1px solid var(--hair);aspect-ratio:16/9}
-
-/* ---------- split feature (image beside copy) ---------- */
-.split{display:grid;gap:2.5rem;align-items:center}
-@media (min-width:940px){
-  .split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4rem}
-  .split--flip .split__media{order:-1}
-}
-.split>*{min-width:0}
-
-.srow__media .ph{margin-bottom:1rem}
-
-/* left-aligned kicker drops its leading rule */
-.kicker--left{justify-content:flex-start}
-.kicker--left::before{display:none}
+.h1{line-height:1.02}
+.h2,.phero__h,.cta__h{line-height:1.1}
