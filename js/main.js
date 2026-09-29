@@ -1,5 +1,5 @@
 /* =============================================================
-   TopicalBacklink — interactions
+   TopicalBacklink, interactions
    No framework. GSAP (CDN) drives reveals and the graph timeline,
    but every section degrades to a readable static state without it.
    ============================================================= */
@@ -79,7 +79,7 @@
 
   /* --------------------------- LINK GRAPH --------------------------- */
   var SIZE = 640, C = SIZE / 2;
-  var SIGNAL = "#0284c7", TIER2 = "#7d8da5";
+  var SIGNAL = "#7c3aed", TIER2 = "#8a82a0";
 
   var RAW = [
     { d: "healthline.com", dr: 91, rel: 96, a: -104, r: 152, t: 1 },
@@ -115,18 +115,18 @@
     var defs = el("defs");
     defs.innerHTML =
       '<linearGradient id="eg" x1="0" y1="0" x2="1" y2="1">' +
-        '<stop offset="0%" stop-color="#0284c7" stop-opacity=".95"/>' +
+        '<stop offset="0%" stop-color="#7c3aed" stop-opacity=".95"/>' +
         '<stop offset="100%" stop-color="#7c3aed" stop-opacity=".5"/></linearGradient>' +
-      '<radialGradient id="cg"><stop offset="0%" stop-color="#38bdf8"/>' +
-        '<stop offset="52%" stop-color="#0284c7"/><stop offset="100%" stop-color="#075985"/></radialGradient>' +
+      '<radialGradient id="cg"><stop offset="0%" stop-color="#a78bfa"/>' +
+        '<stop offset="52%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#5b21b6"/></radialGradient>' +
       '<filter id="ns" x="-70%" y="-70%" width="240%" height="240%">' +
-        '<feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0284c7" flood-opacity=".4"/></filter>' +
+        '<feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7c3aed" flood-opacity=".4"/></filter>' +
       '<filter id="cs" x="-90%" y="-90%" width="280%" height="280%">' +
-        '<feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#0284c7" flood-opacity=".45"/></filter>';
+        '<feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#7c3aed" flood-opacity=".45"/></filter>';
     svg.appendChild(defs);
 
     // orbit guides
-    var guides = el("g", { fill: "none", stroke: "#08101f", "stroke-opacity": ".08", "stroke-dasharray": "2 7" });
+    var guides = el("g", { fill: "none", stroke: "#150d2b", "stroke-opacity": ".08", "stroke-dasharray": "2 7" });
     [158, 222, 282].forEach(function (r) { guides.appendChild(el("circle", { cx: C, cy: C, r: r })); });
     svg.appendChild(guides);
 
@@ -142,7 +142,7 @@
     }
 
     // outer ticks
-    var ticks = el("g", { stroke: "#08101f", "stroke-opacity": ".22", "stroke-width": "1.5" });
+    var ticks = el("g", { stroke: "#150d2b", "stroke-opacity": ".22", "stroke-width": "1.5" });
     for (var i = 0; i < 48; i++) {
       var a = i * 360 / 48, p1 = polar(a, 282), p2 = polar(a, i % 4 === 0 ? 272 : 277);
       ticks.appendChild(el("line", { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y }));
@@ -150,7 +150,7 @@
     svg.appendChild(ticks);
 
     // peer mesh
-    var meshG = el("g", { fill: "none", stroke: "#08101f", "stroke-opacity": ".14", "stroke-width": "1" });
+    var meshG = el("g", { fill: "none", stroke: "#150d2b", "stroke-opacity": ".14", "stroke-width": "1" });
     var meshLines = MESH.map(function (pair) {
       var A = nodes[pair[0]], B = nodes[pair[1]];
       var l = el("line", { x1: A.x, y1: A.y, x2: B.x, y2: B.y });
@@ -217,8 +217,8 @@
         var tx = el("text", {
           x: right ? n.x + rad + 9 : n.x - rad - 9, y: n.y + 4,
           "text-anchor": right ? "start" : "end",
-          "font-size": "11", fill: "#5a6b85",
-          "font-family": "'JetBrains Mono',monospace", "letter-spacing": ".06em"
+          "font-size": "11", fill: "#574f6b",
+          "font-family": "'Plus Jakarta Sans',sans-serif", "letter-spacing": ".06em"
         });
         tx.textContent = "DR" + n.dr;
         g.appendChild(tx);
@@ -358,18 +358,18 @@
 
     var defs = el("defs");
     defs.innerHTML = '<linearGradient id="lf" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0%" stop-color="#0284c7" stop-opacity=".18"/>' +
-      '<stop offset="100%" stop-color="#0284c7" stop-opacity="0"/></linearGradient>';
+      '<stop offset="0%" stop-color="#7c3aed" stop-opacity=".18"/>' +
+      '<stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/></linearGradient>';
     svg.appendChild(defs);
 
-    // gridlines: solid hairlines, one shade off the surface — never dashed
-    var g1 = el("g", { stroke: "#e7edf4", "stroke-width": "1" });
+    // gridlines: solid hairlines, one shade off the surface, never dashed
+    var g1 = el("g", { stroke: "#ece8f4", "stroke-width": "1" });
     GRIDV.forEach(function (v) {
       g1.appendChild(el("line", { x1: PAD.l, y1: yAt(v), x2: VW - PAD.r, y2: yAt(v) }));
     });
     svg.appendChild(g1);
 
-    var gy = el("g", { "font-size": "10", fill: "#6e7d95", "text-anchor": "end", "font-family": "'JetBrains Mono',monospace" });
+    var gy = el("g", { "font-size": "10", fill: "#6b6480", "text-anchor": "end", "font-family": "'Plus Jakarta Sans',sans-serif" });
     GRIDV.forEach(function (v) {
       var t = el("text", { x: PAD.l - 10, y: yAt(v) + 3.5 }); t.textContent = v; gy.appendChild(t);
     });
@@ -380,31 +380,31 @@
       fill: "url(#lf)"
     }));
 
-    // comparison baseline — the dash carries identity, not colour alone
+    // comparison baseline, the dash carries identity, not colour alone
     svg.appendChild(el("polyline", {
-      points: pts(PREV), fill: "none", stroke: "#94a3b8",
+      points: pts(PREV), fill: "none", stroke: "#a59dbb",
       "stroke-width": "2", "stroke-dasharray": "5 5", "stroke-linecap": "round"
     }));
 
     var liveLine = el("polyline", {
-      points: pts(LIVE), fill: "none", stroke: "#0284c7",
+      points: pts(LIVE), fill: "none", stroke: "#7c3aed",
       "stroke-width": "2.5", "stroke-linejoin": "round", "stroke-linecap": "round"
     });
     svg.appendChild(liveLine);
 
     var cross = el("line", {
-      y1: PAD.t, y2: PAD.t + ph, stroke: "#08101f",
+      y1: PAD.t, y2: PAD.t + ph, stroke: "#150d2b",
       "stroke-opacity": ".16", "stroke-width": "1", opacity: 0
     });
     svg.appendChild(cross);
 
     var marks = LIVE.map(function (v, i) {
-      var c = el("circle", { cx: xAt(i), cy: yAt(v), r: 4.5, fill: "#fff", stroke: "#0284c7", "stroke-width": "2" });
+      var c = el("circle", { cx: xAt(i), cy: yAt(v), r: 4.5, fill: "#fff", stroke: "#7c3aed", "stroke-width": "2" });
       svg.appendChild(c); return c;
     });
 
     // selective direct labels only
-    var gl = el("g", { "font-size": "12", "font-weight": "700", fill: "#08101f", "text-anchor": "middle", "font-family": "'Space Grotesk',sans-serif" });
+    var gl = el("g", { "font-size": "12", "font-weight": "700", fill: "#150d2b", "text-anchor": "middle", "font-family": "'Plus Jakarta Sans',sans-serif" });
     LABELLED.forEach(function (i) {
       var t = el("text", { x: xAt(i), y: yAt(LIVE[i]) - 13 }); t.textContent = LIVE[i]; gl.appendChild(t);
     });
@@ -414,15 +414,15 @@
     var cal = el("g");
     cal.appendChild(el("line", {
       x1: xAt(2), y1: yAt(48) - 20, x2: xAt(2) - 26, y2: yAt(48) - 44,
-      stroke: "#08101f", "stroke-opacity": ".28", "stroke-width": "1", "stroke-dasharray": "3 3"
+      stroke: "#150d2b", "stroke-opacity": ".28", "stroke-width": "1", "stroke-dasharray": "3 3"
     }));
-    cal.appendChild(el("rect", { x: xAt(2) - 128, y: yAt(48) - 62, width: 104, height: 22, rx: 7, fill: "#08101f" }));
+    cal.appendChild(el("rect", { x: xAt(2) - 128, y: yAt(48) - 62, width: 104, height: 22, rx: 7, fill: "#150d2b" }));
     var ct = el("text", { x: xAt(2) - 76, y: yAt(48) - 47, "text-anchor": "middle", "font-size": "10", fill: "#fff" });
     ct.textContent = "first links go live";
     cal.appendChild(ct);
     svg.appendChild(cal);
 
-    var gx = el("g", { "font-size": "10", fill: "#6e7d95", "text-anchor": "middle", "font-family": "'JetBrains Mono',monospace" });
+    var gx = el("g", { "font-size": "10", fill: "#6b6480", "text-anchor": "middle", "font-family": "'Plus Jakarta Sans',sans-serif" });
     MONTHS.forEach(function (m, i) {
       var t = el("text", { x: xAt(i), y: PAD.t + ph + 20 }); t.textContent = m; gx.appendChild(t);
     });
@@ -531,9 +531,9 @@
     { t: "Multi-Lingual Link Building", i: "lang", n: true,
       b: "Native-language outreach across 28 markets, run by in-country editors rather than translation tools. Anchor strategy, local relevance and tone are handled per market, so the link reads as though it was always meant to be there." },
     { t: "Local Link Building (USA)", i: "pin",
-      b: "City and state-level authority for multi-location brands. Chamber listings, regional press, local resource pages and genuine community partnerships — the citations and links that move the map pack, not just the blue links." },
+      b: "City and state-level authority for multi-location brands. Chamber listings, regional press, local resource pages and genuine community partnerships, the citations and links that move the map pack, not just the blue links." },
     { t: "Media Placements", i: "news", n: true,
-      b: "Editorial coverage in publications your buyers already read. Journalist-led pitching against live queries, with placements on titles that carry real newsroom standards and real traffic — never sponsored-content farms." },
+      b: "Editorial coverage in publications your buyers already read. Journalist-led pitching against live queries, with placements on titles that carry real newsroom standards and real traffic, never sponsored-content farms." },
     { t: "AI Search Optimization", i: "bulb", n: true,
       b: "We track your brand's visibility across ChatGPT, Perplexity, Gemini, Copilot, Grok, Claude, DeepSeek and AI Overviews, then build the signals that get you recommended. Includes LLM monitoring, AI search progression, sentiment tracking, AEO for specific platforms and AI trust-signal engineering.",
       tag: "FOR AI VISIBILITY → GEO & AEO", show: true }
@@ -578,7 +578,7 @@
         b.classList.toggle("is-on", j === i);
         b.setAttribute("aria-selected", j === i ? "true" : "false");
       });
-      crumb.textContent = "services / " + pad(i) + " — " + pad(SERVICES.length - 1);
+      crumb.textContent = "services / " + pad(i) + " of " + pad(SERVICES.length - 1);
 
       stage.innerHTML =
         '<div class="svc__head">' +
@@ -672,7 +672,7 @@
       type(0);
     }
 
-    // Start unconditionally — gating the start on the observer means the card
+    // Start unconditionally, gating the start on the observer means the card
     // never animates anywhere the callback is delayed or never delivered.
     run();
 
@@ -755,14 +755,14 @@
     svg.appendChild(defs);
 
     // gridlines: solid hairlines one shade off the surface, never dashed
-    var g = el("g", { stroke: "#e7edf4", "stroke-width": "1" });
+    var g = el("g", { stroke: "#ece8f4", "stroke-width": "1" });
     cfg.ticks.forEach(function (t) {
       g.appendChild(el("line", { x1: APAD.l, y1: ayAt(t.v, cfg.max), x2: AW - APAD.r, y2: ayAt(t.v, cfg.max) }));
     });
     svg.appendChild(g);
 
-    var gy = el("g", { "font-size": "11", fill: "#6e7d95", "text-anchor": "end",
-                       "font-family": "'Inter',sans-serif", "font-weight": "600" });
+    var gy = el("g", { "font-size": "11", fill: "#6b6480", "text-anchor": "end",
+                       "font-family": "'Plus Jakarta Sans',sans-serif", "font-weight": "600" });
     cfg.ticks.forEach(function (t) {
       var e = el("text", { x: APAD.l - 12, y: ayAt(t.v, cfg.max) + 4 });
       e.textContent = t.l; gy.appendChild(e);
@@ -780,15 +780,15 @@
     });
     svg.appendChild(path);
 
-    var cross = el("line", { y1: APAD.t, y2: APAD.t + aph, stroke: "#08101f",
+    var cross = el("line", { y1: APAD.t, y2: APAD.t + aph, stroke: "#150d2b",
                              "stroke-opacity": ".16", "stroke-width": "1", opacity: 0 });
     svg.appendChild(cross);
 
     var dot = el("circle", { r: 5, fill: "#fff", stroke: "#7c3aed", "stroke-width": "2.5", opacity: 0 });
     svg.appendChild(dot);
 
-    var gx = el("g", { "font-size": "11", fill: "#6e7d95", "text-anchor": "middle",
-                       "font-family": "'Inter',sans-serif", "font-weight": "600" });
+    var gx = el("g", { "font-size": "11", fill: "#6b6480", "text-anchor": "middle",
+                       "font-family": "'Plus Jakarta Sans',sans-serif", "font-weight": "600" });
     [0, 6, 12].forEach(function (i) {
       // centre-anchoring the end labels pushes them outside the viewBox
       var e = el("text", {
@@ -953,7 +953,7 @@
       }
       if (!LOOKS_LIKE_DOMAIN.test(domain)) {
         input.setAttribute("aria-invalid", "true");
-        say("That doesn&rsquo;t look like a domain &mdash; try something like yourdomain.com", true);
+        say("That doesn&rsquo;t look like a domain. Try something like yourdomain.com", true);
         input.focus();
         return;
       }
@@ -964,7 +964,7 @@
 
       // No backend yet: this only confirms locally. Wire the POST here.
       setTimeout(function () {
-        say("Queued &mdash; your link map for <b>" + domain +
+        say("Queued. Your link map for <b>" + domain +
             "</b> is being prepared. We&rsquo;ll email it within 72 hours.");
         btn.disabled = false;
         form.reset();
@@ -1018,7 +1018,7 @@
 
       // No backend yet: confirms locally only. POST to your CRM here.
       setTimeout(function () {
-        out.textContent = "Thanks — your link-gap analysis for " + d +
+        out.textContent = "Thanks! Your link-gap analysis for " + d +
           " is queued. We will email it within 72 hours.";
         btn.disabled = false;
         form.reset();
@@ -1033,11 +1033,10 @@
 
   /* ----------------------------- TESTIMONIAL MARQUEE ----------------------------- */
   function initTmarq() {
-    var host = $("#tmarq");
-    if (!host) return;
     // The rows translate by -50%, so each needs its content duplicated for the
-    // loop to be seamless. The clone is decorative only.
-    $$(".tmarq__row", host).forEach(function (row) {
+    // loop to be seamless. The clone is decorative only. Covers both the
+    // testimonial rows and the logo rows.
+    $$(".tmarq__row, .lmarq__row").forEach(function (row) {
       var clone = row.cloneNode(true);
       while (clone.firstChild) {
         var node = clone.firstChild;
@@ -1046,6 +1045,365 @@
         row.appendChild(node);
       }
     });
+  }
+
+  /* ----------------------------- HERO FX ----------------------------- */
+  // Cursor spotlight on the ambient field, plus parallax on the proof chips.
+  // Fine pointers only: on touch there is no hover to respond to.
+  function initHeroFx() {
+    var fields = $$(".hfx");
+    if (!fields.length || reduce || !window.matchMedia("(pointer: fine)").matches) return;
+
+    fields.forEach(function (fx) {
+      var host = fx.parentNode;
+      var chips = $$("[data-depth]", host).map(function (c) {
+        return { el: c, d: parseFloat(c.getAttribute("data-depth")) || 0 };
+      });
+      var raf = 0, px = 0, py = 0;
+
+      function paint() {
+        raf = 0;
+        chips.forEach(function (c) {
+          c.el.style.transform = "translate3d(" + (px * c.d).toFixed(1) + "px," + (py * c.d).toFixed(1) + "px,0)";
+        });
+      }
+      host.addEventListener("pointermove", function (e) {
+        var r = host.getBoundingClientRect();
+        var x = e.clientX - r.left, y = e.clientY - r.top;
+        fx.style.setProperty("--mx", x + "px");
+        fx.style.setProperty("--my", y + "px");
+        fx.classList.add("is-live");
+        px = x / r.width - .5; py = y / r.height - .5;
+        if (!raf) raf = requestAnimationFrame(paint);
+      });
+      host.addEventListener("pointerleave", function () {
+        fx.classList.remove("is-live");
+        px = 0; py = 0;
+        if (!raf) raf = requestAnimationFrame(paint);
+      });
+    });
+  }
+
+  /* ----------------------------- CARD GLOW ----------------------------- */
+  function initGlow() {
+    $$(".fcard").forEach(function (c) {
+      c.addEventListener("pointermove", function (e) {
+        var r = c.getBoundingClientRect();
+        c.style.setProperty("--gx", (e.clientX - r.left) + "px");
+        c.style.setProperty("--gy", (e.clientY - r.top) + "px");
+      });
+    });
+  }
+
+  /* ----------------------------- COUNT-UPS ----------------------------- */
+  // <b data-count="156" data-prefix="+" data-suffix="%">+156%</b>
+  // The markup already holds the final value, so no-JS and reduced motion
+  // both read correctly; the tween only runs when motion is on.
+  function initCount() {
+    var nodes = $$("[data-count]");
+    if (!nodes.length || !motionOn) return;
+    nodes.forEach(function (n) {
+      var to = parseFloat(n.getAttribute("data-count"));
+      var from = parseFloat(n.getAttribute("data-from") || "0");
+      var dec = parseInt(n.getAttribute("data-dec") || "0", 10);
+      var pre = n.getAttribute("data-prefix") || "", suf = n.getAttribute("data-suffix") || "";
+      var obj = { v: from };
+      function fmt(v) {
+        return pre + v.toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+      }
+      n.textContent = fmt(from);
+      gsap.to(obj, {
+        v: to, duration: 1.8, ease: "expo.out",
+        scrollTrigger: { trigger: n, start: "top 90%", once: true },
+        onUpdate: function () { n.textContent = fmt(obj.v); }
+      });
+    });
+  }
+
+  /* ----------------------------- IN-VIEW FLAG ----------------------------- */
+  // Adds .is-in once, for CSS-driven reveals (before/after bars, timeline dots).
+  function initInview() {
+    var nodes = $$("[data-inview]");
+    if (!nodes.length) return;
+    if (reduce || typeof IntersectionObserver !== "function") {
+      nodes.forEach(function (n) { n.classList.add("is-in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("is-in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -18% 0px" });
+    nodes.forEach(function (n) { io.observe(n); });
+  }
+
+  /* ----------------------------- PROCESS STEPPER ----------------------------- */
+  // The progress bar is a CSS animation; its animationend is the clock that
+  // advances the step, so pausing the animation (hover, off-screen) pauses
+  // the stepper with no timer bookkeeping.
+  function initProc() {
+    var root = $("#proc");
+    if (!root) return;
+    var steps = $$(".proc__step", root), panes = $$(".proc__pane", root);
+    var cur = 0;
+
+    function select(i, focus) {
+      cur = i;
+      steps.forEach(function (s, j) {
+        s.classList.toggle("is-on", j === i);
+        s.setAttribute("aria-selected", j === i ? "true" : "false");
+        s.tabIndex = j === i ? 0 : -1;
+      });
+      panes.forEach(function (p, j) { p.hidden = j !== i; });
+      if (focus) steps[i].focus();
+      if (motionOn) {
+        gsap.fromTo(panes[i].children, { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: .45, stagger: .06, ease: "power2.out" });
+      }
+    }
+
+    steps.forEach(function (s, i) {
+      s.addEventListener("click", function () { root.classList.add("is-manual"); select(i); });
+      if (!reduce) {
+        $(".proc__bar i", s).addEventListener("animationend", function () {
+          if (!root.classList.contains("is-manual")) select((cur + 1) % steps.length);
+        });
+      }
+    });
+
+    $(".proc__rail", root).addEventListener("keydown", function (e) {
+      var next = e.key === "ArrowDown" || e.key === "ArrowRight" ? cur + 1
+               : e.key === "ArrowUp" || e.key === "ArrowLeft" ? cur - 1 : -1;
+      if (next < 0 || next >= steps.length) return;
+      e.preventDefault();
+      root.classList.add("is-manual");
+      select(next, true);
+    });
+
+    if (typeof IntersectionObserver === "function") {
+      new IntersectionObserver(function (entries) {
+        root.classList.toggle("is-paused", !entries[0].isIntersecting);
+      }, { threshold: .25 }).observe(root);
+    }
+
+    select(0);
+  }
+
+  /* ----------------------------- PRICE ESTIMATOR ----------------------------- */
+  function initCalc() {
+    var root = $("#calc");
+    if (!root) return;
+    var range = $("#calcRange"), qtyOut = $("#calcQty"), total = $("#calcTotal");
+    var rateOut = $("#calcRate"), leadOut = $("#calcLead"), planOut = $("#calcPlan");
+    var segs = $$(".seg__b", root);
+    var rate = 480, lead = "", shown = 0;
+
+    // Programme sizes come from pricing.html: Starter ~8, Growth ~22, Scale 40+.
+    function plan(q) { return q <= 8 ? "Starter" : q <= 22 ? "Growth" : "Scale"; }
+    function money(v) { return "$" + Math.round(v).toLocaleString("en-US"); }
+
+    function update() {
+      var q = parseInt(range.value, 10);
+      var pct = (q - range.min) / (range.max - range.min) * 100;
+      range.style.setProperty("--p", pct + "%");
+      qtyOut.textContent = q;
+      rateOut.textContent = money(rate);
+      leadOut.textContent = lead;
+      planOut.textContent = plan(q);
+
+      var target = q * rate;
+      if (motionOn) {
+        var obj = { v: shown };
+        gsap.to(obj, { v: target, duration: .5, ease: "power2.out", overwrite: true,
+          onUpdate: function () { total.firstChild.nodeValue = money(obj.v); } });
+      } else {
+        total.firstChild.nodeValue = money(target);
+      }
+      shown = target;
+    }
+
+    function pick(b) {
+      segs.forEach(function (s) { s.setAttribute("aria-checked", s === b ? "true" : "false"); s.tabIndex = s === b ? 0 : -1; });
+      rate = parseFloat(b.getAttribute("data-rate"));
+      lead = b.getAttribute("data-lead");
+      update();
+    }
+
+    segs.forEach(function (b, i) {
+      b.addEventListener("click", function () { pick(b); });
+      b.addEventListener("keydown", function (e) {
+        var n = e.key === "ArrowRight" || e.key === "ArrowDown" ? i + 1
+              : e.key === "ArrowLeft" || e.key === "ArrowUp" ? i - 1 : -1;
+        if (n < 0 || n >= segs.length) return;
+        e.preventDefault(); segs[n].focus(); pick(segs[n]);
+      });
+    });
+    range.addEventListener("input", update);
+
+    pick($('.seg__b[aria-checked="true"]', root) || segs[0]);
+  }
+
+  /* ----------------------------- CASE STUDY: TOC ----------------------------- */
+  function initToc() {
+    var toc = $(".toc");
+    if (!toc) return;
+    var links = $$("a[href^='#']", toc);
+    var secs = links.map(function (a) { return $(a.getAttribute("href")); });
+    var bar = $(".toc__prog i", toc), article = $(".prose");
+
+    function onScroll() {
+      var line = window.innerHeight * .3, on = 0;
+      secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) on = i; });
+      links.forEach(function (a, i) { a.classList.toggle("is-on", i === on); });
+      if (bar && article) {
+        var r = article.getBoundingClientRect();
+        var p = (window.innerHeight * .3 - r.top) / (r.height - window.innerHeight * .4);
+        bar.style.transform = "scaleX(" + Math.max(0, Math.min(1, p)) + ")";
+      }
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ----------------------------- CASE STUDY: TIMELINE ----------------------------- */
+  function initTline() {
+    var root = $(".tline");
+    if (!root) return;
+    var fill = $(".tline__fill", root), items = $$(".tl", root);
+
+    function onScroll() {
+      var r = root.getBoundingClientRect(), mark = window.innerHeight * .62;
+      var p = Math.max(0, Math.min(1, (mark - r.top) / r.height));
+      fill.style.setProperty("--p", p.toFixed(3));
+      items.forEach(function (t) { t.classList.toggle("is-in", t.getBoundingClientRect().top < mark); });
+    }
+    if (reduce) {
+      fill.style.setProperty("--p", 1);
+      items.forEach(function (t) { t.classList.add("is-in"); });
+      return;
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* ----------------------------- CASE STUDY: RESULTS CHART ----------------------------- */
+  // Series live in the markup (data-vals on each tab) so the template can be
+  // re-populated per case study without touching this file.
+  var CW = 640, CH = 280, CPAD = { l: 48, r: 18, t: 18, b: 34 };
+  var cpw = CW - CPAD.l - CPAD.r, cph = CH - CPAD.t - CPAD.b;
+
+  function initCsChart() {
+    var root = $("#csChart");
+    if (!root) return;
+    var plot = $(".cschart__plot", root), now = $(".cschart__now", root);
+    var tabs = $$(".mtab", root);
+    var labels = (root.getAttribute("data-labels") || "").split(",");
+
+    var svg = el("svg", { viewBox: "0 0 " + CW + " " + CH, role: "img" });
+    var defs = el("defs");
+    defs.innerHTML = '<linearGradient id="csf" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0%" stop-color="#7c3aed" stop-opacity=".24"/>' +
+      '<stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/></linearGradient>';
+    svg.appendChild(defs);
+    var gGrid = el("g", { stroke: "#ece8f4", "stroke-width": "1" });
+    var gY = el("g", { "font-size": "11", fill: "#6b6480", "text-anchor": "end", "font-family": "'Plus Jakarta Sans',sans-serif", "font-weight": "600" });
+    var area = el("path", { fill: "url(#csf)" });
+    var line = el("path", { fill: "none", stroke: "#7c3aed", "stroke-width": "2.75", "stroke-linecap": "round", "stroke-linejoin": "round" });
+    var cross = el("line", { y1: CPAD.t, y2: CPAD.t + cph, stroke: "#150d2b", "stroke-opacity": ".16", opacity: 0 });
+    var dot = el("circle", { r: 5.5, fill: "#fff", stroke: "#7c3aed", "stroke-width": "2.75", opacity: 0 });
+    var endDot = el("circle", { r: 5, fill: "#7c3aed" });
+    var gX = el("g", { "font-size": "11", fill: "#6b6480", "font-family": "'Plus Jakarta Sans',sans-serif", "font-weight": "600" });
+    [gGrid, gY, area, line, cross, dot, endDot, gX].forEach(function (n) { svg.appendChild(n); });
+
+    var tip = document.createElement("div");
+    tip.className = "appr__tip"; tip.hidden = true;
+    plot.appendChild(svg); plot.appendChild(tip);
+
+    var cfg = null;
+    function xAt(i, n) { return CPAD.l + cpw * i / (n - 1); }
+    function yAt(v) { return CPAD.t + cph - ((v - cfg.min) / (cfg.max - cfg.min)) * cph; }
+    function fmt(v) { return (cfg.pre || "") + v.toLocaleString("en-US") + (cfg.suf || ""); }
+
+    function draw(animate) {
+      var n = cfg.vals.length;
+      var pts = cfg.vals.map(function (v, i) { return [xAt(i, n), yAt(v)]; });
+      var d = smooth(pts);
+      line.setAttribute("d", d);
+      area.setAttribute("d", d + " L" + xAt(n - 1, n) + "," + (CPAD.t + cph) + " L" + CPAD.l + "," + (CPAD.t + cph) + " Z");
+      endDot.setAttribute("cx", pts[n - 1][0]); endDot.setAttribute("cy", pts[n - 1][1]);
+
+      gGrid.innerHTML = ""; gY.innerHTML = ""; gX.innerHTML = "";
+      for (var k = 0; k <= 3; k++) {
+        var v = cfg.min + (cfg.max - cfg.min) * k / 3, y = yAt(v);
+        gGrid.appendChild(el("line", { x1: CPAD.l, x2: CW - CPAD.r, y1: y, y2: y }));
+        var t = el("text", { x: CPAD.l - 10, y: y + 4 }); t.textContent = fmt(Math.round(v)); gY.appendChild(t);
+      }
+      [0, Math.floor((n - 1) / 2), n - 1].forEach(function (i) {
+        var t = el("text", { x: xAt(i, n), y: CPAD.t + cph + 22, "text-anchor": i === 0 ? "start" : i === n - 1 ? "end" : "middle" });
+        t.textContent = labels[i] || ""; gX.appendChild(t);
+      });
+      svg.setAttribute("aria-label", cfg.aria);
+      now.innerHTML = fmt(cfg.vals[n - 1]) + "<small>" + cfg.name + " &middot; " + (labels[n - 1] || "") + "</small>";
+
+      if (!animate) return;
+      var L = line.getTotalLength();
+      gsap.fromTo(line, { attr: { "stroke-dasharray": L, "stroke-dashoffset": L } },
+        { attr: { "stroke-dashoffset": 0 }, duration: 1.2, ease: "power2.out" });
+      gsap.fromTo(area, { opacity: 0 }, { opacity: 1, duration: .8, delay: .3 });
+      gsap.fromTo(endDot, { attr: { r: 0 } }, { attr: { r: 5 }, duration: .4, delay: 1.1, ease: "back.out(3)" });
+    }
+
+    function select(tab, focus, animate) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+      });
+      if (focus) tab.focus();
+      cfg = {
+        vals: tab.getAttribute("data-vals").split(",").map(Number),
+        min: parseFloat(tab.getAttribute("data-min") || "0"),
+        max: parseFloat(tab.getAttribute("data-max")),
+        pre: tab.getAttribute("data-prefix"), suf: tab.getAttribute("data-suffix"),
+        name: tab.textContent.trim(), aria: tab.getAttribute("data-aria") || ""
+      };
+      draw(animate === undefined ? motionOn : animate);
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(t); });
+      t.addEventListener("keydown", function (e) {
+        var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : -1;
+        if (n < 0 || n >= tabs.length) return;
+        e.preventDefault(); select(tabs[n], true);
+      });
+    });
+
+    svg.addEventListener("mousemove", function (e) {
+      var r = svg.getBoundingClientRect(), n = cfg.vals.length;
+      var i = Math.round(((e.clientX - r.left) / r.width * CW - CPAD.l) / cpw * (n - 1));
+      if (i < 0 || i >= n) return;
+      var x = xAt(i, n), y = yAt(cfg.vals[i]);
+      cross.setAttribute("x1", x); cross.setAttribute("x2", x); cross.setAttribute("opacity", 1);
+      dot.setAttribute("cx", x); dot.setAttribute("cy", y); dot.setAttribute("opacity", 1);
+      tip.innerHTML = "<u>" + (labels[i] || "") + "</u><b><i></i>" + fmt(cfg.vals[i]) + "</b>";
+      tip.style.left = (x / CW * 100) + "%"; tip.style.top = (y / CH * 100) + "%";
+      tip.hidden = false;
+    });
+    svg.addEventListener("mouseleave", function () {
+      cross.setAttribute("opacity", 0); dot.setAttribute("opacity", 0); tip.hidden = true;
+    });
+
+    // Draw once on arrival so the line animation is actually seen.
+    var first = $('.mtab[aria-selected="true"]', root) || tabs[0];
+    // Render statically first so the card is never empty, then replay the
+    // draw-in once the chart scrolls into view.
+    select(first, false, false);
+    if (motionOn && window.ScrollTrigger) {
+      ScrollTrigger.create({ trigger: root, start: "top 80%", once: true, onEnter: function () { draw(true); } });
+    }
   }
 
   /* ----------------------------- boot ----------------------------- */
@@ -1071,6 +1429,15 @@
     safe("audit", initAudit);
     safe("lead", initLead);
     safe("year", initYear);
+    safe("herofx", initHeroFx);
+    safe("glow", initGlow);
+    safe("count", initCount);
+    safe("inview", initInview);
+    safe("proc", initProc);
+    safe("calc", initCalc);
+    safe("toc", initToc);
+    safe("tline", initTline);
+    safe("cschart", initCsChart);
     safe("reveals", initReveals);
     if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
   }
