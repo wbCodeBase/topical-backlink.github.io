@@ -2495,3 +2495,6 @@ main > section:first-child{padding-top:calc(var(--nav-h) + var(--sec-y))}
   .lmarq{-webkit-mask-image:none;mask-image:none}
 }
 @media (prefers-contrast:more){.lmarq__row img{filter:none;opacity:1}}
+
+/* Contact-form honeypot (spam trap). */
+.tb-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}

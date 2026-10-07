@@ -78,7 +78,7 @@
 <section>
   <div class="shell">
     <div class="cgrid">
-      <!-- NOTE: client-side only. Wire this POST to your CRM before launch. -->
+      <!-- In WordPress this form POSTs to admin-ajax (action tb_lead). Static HTML: client-side only. -->
       <form class="cform" id="leadForm" novalidate data-rise>
         <div class="frow">
           <div class="field">
@@ -111,6 +111,7 @@
           <label for="lfMsg">Anything we should know?</label>
           <textarea id="lfMsg" name="message" placeholder="Target pages, anchors to avoid, markets, current volume&hellip;"></textarea>
         </div>
+        <div class="tb-hp" aria-hidden="true"><label for="lfWebsite">Leave this empty</label><input id="lfWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <button class="btn btn--primary btn--lg" type="submit" id="lfBtn">Request free link map <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
         <p class="cform__msg" id="lfMsg2" role="status" aria-live="polite" hidden></p>
       </form>
@@ -123,7 +124,7 @@
         </div>
         <div class="cbox">
           <h3>Email us</h3>
-          <p><a href="mailto:hello@topicalbacklink.com">hello@topicalbacklink.com</a><br>
+          <p><a href="mailto:hello@topicalbacklinks.com">hello@topicalbacklinks.com</a><br>
             We reply within one business day.</p>
         </div>
         <div class="cbox">

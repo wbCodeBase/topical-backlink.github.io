@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TopicalBacklink Website Guide</title>
+<style>
+:root{--ink:#150d2b;--body:#433b57;--muted:#6b6480;--violet:#7c3aed;--violet-deep:#5b21b6;--soft:#f3eefe;--paper:#f7f4fd;--hair:rgba(21,13,43,.12);--warn:#b45309;--warn-soft:#fef3c7}
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:var(--body);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px 80px}
+header{background:linear-gradient(135deg,#5b21b6,#7c3aed 60%,#a78bfa);color:#fff;padding:56px 20px 48px;margin-bottom:40px}
+header .wrap{padding-bottom:0}
+header h1{margin:0;font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.15;letter-spacing:-.02em}
+header p{margin:.75rem 0 0;max-width:40rem;color:rgba(255,255,255,.88)}
+nav.toc{background:var(--paper);border:1px solid var(--hair);border-radius:14px;padding:18px 22px;margin-bottom:40px}
+nav.toc b{display:block;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+nav.toc ol{margin:0;padding-left:1.2em;columns:2;column-gap:32px}
+nav.toc a{color:var(--violet-deep);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{color:var(--ink);font-size:1.6rem;letter-spacing:-.02em;margin:56px 0 12px;padding-top:12px;border-top:1px solid var(--hair)}
+h3{color:var(--ink);font-size:1.15rem;margin:28px 0 8px}
+ol.steps{counter-reset:s;list-style:none;padding:0}
+ol.steps>li{counter-increment:s;position:relative;padding-left:44px;margin:14px 0}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:99px;background:var(--violet);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.9rem}
+.path{display:inline-block;background:var(--soft);color:var(--violet-deep);border-radius:6px;padding:1px 8px;font-weight:600;font-size:.92em;white-space:nowrap}
+.note,.warn{border-radius:12px;padding:14px 18px;margin:18px 0}
+.note{background:var(--soft);border-left:4px solid var(--violet)}
+.warn{background:var(--warn-soft);border-left:4px solid var(--warn);color:#78350f}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+th{background:var(--paper);color:var(--ink)}
+code{background:var(--paper);padding:1px 6px;border-radius:5px;font-size:.9em}
+footer{color:var(--muted);font-size:.85rem;margin-top:56px}
+@media (max-width:640px){nav.toc ol{columns:1}}
+@media print{header{background:#5b21b6!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}h2{break-after:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>TopicalBacklink website guide</h1>
+    <p>How to install the theme and manage every page from the WordPress dashboard: homepage, services, case studies and the blog. No coding needed.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <b>Contents</b>
+  <ol>
+    <li><a href="#install">Install or update the theme</a></li>
+    <li><a href="#plugin">The fields plugin (required)</a></li>
+    <li><a href="#map">What lives where</a></li>
+    <li><a href="#home">Edit the homepage</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#cases">Case studies</a></li>
+    <li><a href="#blog">The blog</a></li>
+    <li><a href="#leads">Leads from the contact form</a></li>
+    <li><a href="#todo">Before launch checklist</a></li>
+    <li><a href="#help">Problems and fixes</a></li>
+  </ol>
+</nav>
+
+<h2 id="install">1. Install or update the theme</h2>
+<div class="warn"><b>Back up first.</b> Before installing or updating, make a backup with your host's backup tool or a plugin such as UpdraftPlus.</div>
+<ol class="steps">
+  <li>In WordPress go to <span class="path">Appearance → Themes → Add New Theme → Upload Theme</span>.</li>
+  <li>Choose <code>topicalbacklink.zip</code> (in the <b>1-Theme</b> folder of this package) and click <b>Install Now</b>. If the theme is already installed, choose <b>Replace active with uploaded</b>.</li>
+  <li>Click <b>Activate</b> if it isn't active already.</li>
+  <li>Go to <span class="path">Appearance → TopicalBacklink setup</span> and click <b>Run setup</b>. This creates any missing pages (Home, Services, Pricing, Case studies, About, Contact, Blog), sets the homepage, and fills Services and Case studies with the starting content. It is safe to run again; it never overwrites content you have edited.</li>
+</ol>
+<div class="note">Updating from an older version? Your existing <i>White-label</i> service page and <i>Collab Management</i> case study page are moved into the new Services and Case studies sections automatically, at the <b>same web addresses</b>. The old copies are kept as drafts under Pages, and you can delete them once you're happy.</div>
+
+<h2 id="plugin">2. The fields plugin: ACF PRO</h2>
+<p>The editable sections use <b>Advanced Custom Fields PRO</b>, the same plugin that already powers the homepage fields. Nothing new to install: just keep it active and up to date under <span class="path">Plugins</span>.</p>
+<ul>
+  <li>The Services, Case studies and Page headings fields are built into the theme. They appear on the edit screens automatically and are <b>not</b> listed under <span class="path">ACF → Field Groups</span>, so they can't be changed or deleted there by accident.</li>
+  <li>Don't install <i>Secure Custom Fields</i> or the free <i>Advanced Custom Fields</i> alongside ACF PRO. They are versions of the same plugin and will conflict.</li>
+  <li>If ACF PRO is ever deactivated (e.g. the licence lapses), the site keeps displaying everything correctly; you just can't edit those sections until it's active again.</li>
+</ul>
+
+<h2 id="map">3. What lives where</h2>
+<table>
+  <tr><th>On the website</th><th>Edit it in the dashboard</th></tr>
+  <tr><td>Homepage sections</td><td><span class="path">Pages → Home → Edit</span></td></tr>
+  <tr><td>Services page (the list) and each service's own page</td><td><span class="path">Services</span> in the left menu</td></tr>
+  <tr><td>Case studies page, each case study's page, and the "Our work" tiles on the homepage</td><td><span class="path">Case studies</span> in the left menu</td></tr>
+  <tr><td>Headings at the top of the Services and Case studies pages</td><td><span class="path">Pages → Services</span> or <span class="path">Pages → Case studies</span> → "Page headings" box</td></tr>
+  <tr><td>Blog articles</td><td><span class="path">Posts</span></td></tr>
+  <tr><td>Blog categories (filter buttons)</td><td><span class="path">Posts → Categories</span></td></tr>
+  <tr><td>Contact form messages</td><td><span class="path">Leads</span></td></tr>
+  <tr><td>Where contact form emails go</td><td><span class="path">Settings → General → Lead notification email</span></td></tr>
+  <tr><td>Pricing, About and Contact page text</td><td>Fixed in the design; ask your developer to change these</td></tr>
+</table>
+
+<h2 id="home">4. Edit the homepage</h2>
+<p>Open <span class="path">Pages → Home → Edit</span>. Below the title you'll find a box for each section (Hero, Platform, Stats, Services, How we build links, Case studies, CTA, FAQ). Any field you leave empty shows the original design text.</p>
+<div class="note"><b>Highlighting words in a heading:</b> wrap them like this: <code>Link building for &lt;span class="mark"&gt;AI visibility&lt;/span&gt;</code>. They get the violet underline stroke.</div>
+<p><b>"Our work" tiles:</b> if you leave the homepage's case study list empty, the tiles show your first six <b>Case studies</b> automatically, so you only maintain them in one place.</p>
+
+<h2 id="services">5. Services</h2>
+<h3>Change an existing service</h3>
+<ol class="steps">
+  <li>Go to <span class="path">Services → All services</span> and click the service.</li>
+  <li>The <b>title</b> is the service name. The box called <b>Short description</b> is the text shown on the Services page. <b>Service image</b> (right column) is its picture.</li>
+  <li>The <b>Service page content</b> box has a tab for each section of the page: Listing card, Hero, Overview, Features, Process, Price estimator, Comparison, Case study &amp; reviews, FAQ, Call to action.</li>
+  <li>Edit, then click <b>Update</b>.</li>
+</ol>
+<h3>Add a new service</h3>
+<ol class="steps">
+  <li><span class="path">Services → Add new service</span>.</li>
+  <li>Type the name, the short description, and set a service image.</li>
+  <li>Fill in only the sections you want. <b>Any section left empty is hidden</b>, so a new service can start small (Hero + Overview) and grow later.</li>
+  <li>Set its position on the Services page in <span class="path">Post Attributes → Order</span> (1 = first).</li>
+  <li>Click <b>Publish</b>. It appears on the Services page and in "Other ways we build authority" on the other service pages automatically.</li>
+</ol>
+<h3>Handy details</h3>
+<ul>
+  <li><b>Highlighted words</b> fields add the violet brush stroke after a heading. "Heading" = <i>A link department that</i>, "Highlighted words" = <i>wears your badge</i>.</li>
+  <li><b>Counters</b> count up when the page loads: put the number in <i>Number</i> (e.g. 3500) and symbols in <i>Before</i>/<i>After</i> (e.g. +).</li>
+  <li><b>Comparison table:</b> type <code>yes</code> or <code>no</code> for a tick or cross, or short text such as <code>90 days</code>.</li>
+  <li><b>Price estimator:</b> switch it on in its tab. Leave the bands empty to use the standard rate card.</li>
+  <li><b>Overview picture:</b> choose an image, the white-label dashboard illustration, or nothing.</li>
+  <li>To <b>hide a service</b> without deleting it, switch it to Draft.</li>
+</ul>
+
+<h2 id="cases">6. Case studies</h2>
+<ol class="steps">
+  <li><span class="path">Case studies → Add new case study</span> (or click an existing one).</li>
+  <li><b>Title</b> = the headline (e.g. "How Collab Management grew enquiries by 156%"). <b>Summary</b> = the text on the Case studies page. <b>Main image</b> = the picture.</li>
+  <li>In <b>Card &amp; facts</b> fill the client, industry, DR before/after, duration and headline result. These feed the cards on the Case studies page and the homepage tiles.</li>
+  <li>The numbered tabs (<b>1. Challenge</b> to <b>5. Placements</b>) are the story. Only the ones you fill in appear, and the "On this page" menu adjusts itself.</li>
+  <li>Set the position with <span class="path">Post Attributes → Order</span>, then <b>Publish</b>.</li>
+</ol>
+<h3>The results chart</h3>
+<ul>
+  <li><b>X-axis labels:</b> comma separated, one per point, e.g. <code>Month 0,Month 1,Month 2</code>.</li>
+  <li><b>Metrics:</b> one row per tab above the chart. <i>Values</i> must have the same count as the labels, e.g. <code>19,21,24</code>. Leave <i>Chart top</i> empty for automatic scaling.</li>
+  <li><b>Before / after bars</b> size themselves from the two numbers.</li>
+</ul>
+<p>To feature a case study on a service page, open the service → tab <b>Case study &amp; reviews</b> → choose it in <b>Featured case study</b>.</p>
+
+<h2 id="blog">7. The blog</h2>
+<ol class="steps">
+  <li><span class="path">Posts → Add New Post</span>. Write the article using <b>Heading</b> blocks: H2 for main sections, H3 for sub-points. The table of contents is built from these automatically.</li>
+  <li>Set a <b>Featured image</b> and pick a <b>Category</b> in the right sidebar.</li>
+  <li>In the sidebar panel <b>Card &amp; article settings</b>: write the <b>Card summary</b> (shown on blog cards, about 140 to 160 characters), add <b>Key takeaways</b> (one per line), and switch off the table of contents if you don't want it.</li>
+  <li>Publish.</li>
+</ol>
+<ul>
+  <li>The large <b>featured article</b> at the top of the blog is the newest post. To pin a different one, tick <b>Stick to the top of the blog</b> in that post's sidebar.</li>
+  <li>Category filter buttons appear automatically for every category that has at least one post.</li>
+  <li>The <b>author box</b> uses <span class="path">Users → Profile → Biographical Info</span>. Profile photos come from <a href="https://gravatar.com">gravatar.com</a>.</li>
+</ul>
+
+<h2 id="leads">8. Leads from the contact form</h2>
+<p>Every contact form message is saved under <span class="path">Leads</span> and emailed to the address in <span class="path">Settings → General → Lead notification email</span> (or the site admin email if empty). If emails don't arrive, install an SMTP plugin such as <b>WP Mail SMTP</b>; the leads are still saved in the dashboard.</p>
+
+<h2 id="todo">9. Before launch checklist</h2>
+<ul>
+  <li><b>Service images:</b> <i>White-label</i>, <i>Multi-lingual</i> and <i>Local</i> have no image yet and show a purple placeholder. The old site displayed images loaded from other agencies' websites (ecomranker.com, tlinks.io, authority.builders), which were removed because they belong to those companies. Upload your own under each service → <b>Service image</b>.</li>
+  <li><b>Case study figures:</b> the starting numbers are illustrative. Replace them with measured results.</li>
+  <li><b>Case study summaries:</b> five of the six case studies only have card details. Add a Summary and fill in the story tabs when you have them.</li>
+  <li><b>Blog author:</b> fill in your profile's display name and biographical info.</li>
+  <li><b>SEO:</b> an SEO plugin (Yoast, Rank Math) is optional. The theme writes basic titles and descriptions itself and steps aside when one is installed.</li>
+</ul>
+
+<h2 id="help">10. Problems and fixes</h2>
+<table>
+  <tr><th>Problem</th><th>Fix</th></tr>
+  <tr><td>A service or case study page shows "Page not found"</td><td><span class="path">Settings → Permalinks</span> → click <b>Save Changes</b> (no edits needed). This refreshes the site's addresses.</td></tr>
+  <tr><td>I don't see the editing boxes on a service or case study</td><td>Check that ACF PRO is active under <span class="path">Plugins</span> (section 2). Also check <span class="path">Screen Options</span> at the top right of the edit screen.</td></tr>
+  <tr><td>I can't find the Excerpt / Summary box</td><td>On the edit screen, open <span class="path">Screen Options</span> (top right) and tick <b>Excerpt</b>.</td></tr>
+  <tr><td>A section disappeared</td><td>Sections hide when they have no content. Check the matching tab has content (e.g. at least one FAQ row).</td></tr>
+  <tr><td>A change doesn't show on the site</td><td>Clear the cache if you use a caching plugin or host cache, then refresh the page.</td></tr>
+  <tr><td>Blog page missing</td><td><span class="path">Appearance → TopicalBacklink setup → Run setup</span>.</td></tr>
+</table>
+
+<footer>TopicalBacklink theme. Keep this guide with the theme files; it matches the version in this package.</footer>
+</div>
+</body>
+</html>

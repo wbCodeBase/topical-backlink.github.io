@@ -1,0 +1,16 @@
+/*
+Theme Name:        TopicalBacklink
+Theme URI:         https://topicalbacklinks.com/
+Author:            TopicalBacklink
+Author URI:        https://topicalbacklinks.com/
+Description:       Custom theme for TopicalBacklink, the link building agency. On activation it creates the Home, Services, Pricing, Case studies, About and Contact pages, assigns their templates and sets the homepage.
+Version:           1.0.0
+Requires at least: 5.8
+Tested up to:      6.8
+Requires PHP:      7.4
+License:           Proprietary
+Text Domain:       topicalbacklink
+*/
+
+/* The site's real stylesheet is css/style.css (enqueued in functions.php).
+   This file only carries the theme header WordPress needs. */

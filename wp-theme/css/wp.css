@@ -1,0 +1,76 @@
+/* WordPress-only additions. The design itself lives in style.css. */
+
+/* Keep the fixed nav below the admin bar when logged in. */
+.admin-bar .nav{top:32px}
+.admin-bar .sheet{top:32px}
+@media (max-width:782px){
+  .admin-bar .nav{top:46px}
+  .admin-bar .sheet{top:46px}
+}
+
+/* Generic pages, posts and archives (page.php / index.php). */
+.wpc{padding:0 0 var(--sec-y)}
+.wpc__entry{max-width:760px;margin:0 auto;color:var(--body);font-size:1.0625rem;line-height:1.75}
+.wpc__entry>*+*{margin-top:1.1em}
+.wpc__entry h2,.wpc__entry h3,.wpc__entry h4{color:var(--ink);line-height:1.25;margin-top:1.8em}
+.wpc__entry h2{font-size:var(--t-h3)}
+.wpc__entry a{color:var(--signal);text-decoration:underline;text-underline-offset:3px}
+.wpc__entry ul,.wpc__entry ol{padding-left:1.4em}
+.wpc__entry ul{list-style:disc}
+.wpc__entry ol{list-style:decimal}
+.wpc__entry img,.wpc__entry video,.wpc__entry iframe{max-width:100%;height:auto;border-radius:var(--r-md)}
+.wpc__entry blockquote{border-left:3px solid var(--signal);padding-left:1em;color:var(--ink)}
+.wpc__entry table{width:100%;border-collapse:collapse}
+.wpc__entry td,.wpc__entry th{border:1px solid var(--hair);padding:.5em .75em}
+.wpc__thumb img{width:100%;height:auto;border-radius:var(--r-lg)}
+.wpc__meta{font-size:var(--t-xs);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.wpc__list{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.wpc__card{background:var(--canvas);border:1px solid var(--hair);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--rest);display:flex;flex-direction:column;gap:.75rem;align-items:flex-start}
+.wpc__title{font-size:1.25rem;line-height:1.3;color:var(--ink)}
+.wpc__title a{color:inherit}
+.wpc__excerpt{color:var(--body)}
+.wpc__pager{margin-top:2rem;text-align:center}
+.wpc__pager .page-numbers{display:inline-block;padding:.4em .8em;border-radius:var(--r-sm);color:var(--ink)}
+.wpc__pager .page-numbers.current{background:var(--signal);color:#fff}
+.alignleft{float:left;margin:0 1.5em 1em 0}
+.alignright{float:right;margin:0 0 1em 1.5em}
+.aligncenter{display:block;margin-left:auto;margin-right:auto}
+.screen-reader-text{position:absolute!important;clip:rect(1px,1px,1px,1px);width:1px;height:1px;overflow:hidden}
+
+/* Homepage FAQ answers come from an ACF WYSIWYG field (paragraphs, lists). */
+.qa__a p+p,.qa__a p+ul,.qa__a ul+p{margin-top:.75em}
+.qa__a ul{list-style:disc;padding-left:1.25em}
+.qa__a a{color:var(--signal);text-decoration:underline}
+
+/* Branded stand-in when a post, service or case study has no image. */
+.bph{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(135deg,#5b21b6,#7c3aed 50%,#a78bfa)}
+.bph::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(to right,rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 15%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,#000 15%,transparent 75%);
+}
+.bph svg{position:relative;width:64px;height:64px;opacity:.92}
+
+/* ---------- Services & Case studies (dashboard-driven) ---------- */
+.shot .bph{position:relative;display:grid;aspect-ratio:16/9}
+.srow__h a{transition:color .25s}
+.srow__h a:hover{color:var(--signal-deep)}
+.split--solo{grid-template-columns:minmax(0,1fr)!important;max-width:760px;margin-inline:auto}
+.svc-shot{margin:0;overflow:hidden;border-radius:var(--r-xl);box-shadow:var(--lift-hard)}
+.svc-shot img{display:block;width:100%;height:auto}
+
+/* case cards on the Case studies page link to the full story */
+.case--link{position:relative}
+.case--link .case__h a::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}
+.case--link .case__h a:focus-visible{outline:none}
+.case--link:has(.case__h a:focus-visible){outline:2px solid var(--signal);outline-offset:3px}
+.case__img{margin:0;aspect-ratio:16/8;overflow:hidden;background:var(--paper);border-bottom:1px solid var(--hair)}
+.case__img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.case--link:hover .case__img img{transform:scale(1.03)}
+.case__go{display:inline-flex;align-items:center;gap:.45rem;margin-top:1.1rem;font-size:.88rem;font-weight:600;color:var(--signal-deep)}
+.case__go .ico{width:15px;height:15px;transition:transform .3s var(--ease)}
+.case--link:hover .case__go .ico{transform:translateX(4px)}
+.srow{position:relative}
+.srow__anchor{position:absolute;top:0;left:0}

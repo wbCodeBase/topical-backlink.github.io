@@ -525,7 +525,8 @@
     spark: '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>'
   };
 
-  var SERVICES = [
+  // WordPress passes the ACF service rows as window.TB_SERVICES.
+  var SERVICES = (window.TB_SERVICES && window.TB_SERVICES.length) ? window.TB_SERVICES : [
     { t: "White-Label Link Building", i: "brief",
       b: "Scalable, agency-ready link building with genuine editorial outreach and zero PBNs. We become your link-building department and offer complete transparency. Every placement is tracked live. Every link is guaranteed for a year." },
     { t: "Multi-Lingual Link Building", i: "lang", n: true,
@@ -541,6 +542,13 @@
 
   function pad(n) { return String(n + 1).padStart(2, "0"); }
 
+  // Service text may come from the CMS, so it is escaped before innerHTML.
+  function esc(v) {
+    return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
   function initServices() {
     var index = $("#svcIndex"), stage = $("#svcStage"), crumb = $("#svcCrumb");
     if (!index) return;
@@ -552,7 +560,7 @@
       b.setAttribute("aria-selected", i === 0 ? "true" : "false");
       b.innerHTML =
         '<span class="svc__n">' + pad(i) + "</span>" +
-        '<span class="svc__t"><b>' + s.t + "</b>" + (s.n ? '<span class="flag">NEW</span>' : "") + "</span>" +
+        '<span class="svc__t"><b>' + esc(s.t) + "</b>" + (s.n ? '<span class="flag">NEW</span>' : "") + "</span>" +
         '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + ICONS.arrow + "</svg>";
       b.addEventListener("click", function () { select(i); });
       index.appendChild(b);
@@ -582,20 +590,20 @@
 
       stage.innerHTML =
         '<div class="svc__head">' +
-          '<span class="svc__badge"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + ICONS[s.i] + "</svg></span>" +
+          '<span class="svc__badge"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[s.i] || ICONS.brief) + "</svg></span>" +
           "<div>" +
             '<div class="svc__kicker">SERVICE / ' + pad(i) + (s.n ? ' <em>· NEW</em>' : "") + "</div>" +
-            '<h3 class="svc__title">' + s.t + "</h3>" +
+            '<h3 class="svc__title">' + esc(s.t) + "</h3>" +
           "</div>" +
         "</div>" +
-        '<p class="svc__body">' + s.b + "</p>" +
+        '<p class="svc__body">' + esc(s.b) + "</p>" +
         (s.show
           ? '<div class="svc__show"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + ICONS.spark + "</svg>" +
             '<div class="svc__skel"><i style="width:78%"></i><i style="width:58%"></i><i style="width:34%"></i></div></div>'
           : "") +
         '<div class="svc__foot">' +
-          (s.tag ? '<span class="svc__tag">' + s.tag + "</span>" : "<span></span>") +
-          '<a href="#pricing" class="svc__go">Explore service' +
+          (s.tag ? '<span class="svc__tag">' + esc(s.tag) + "</span>" : "<span></span>") +
+          '<a href="' + esc(s.u || "#pricing") + '" class="svc__go">Explore service' +
             '<i><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">' + ICONS.arrow + "</svg></i></a>" +
         "</div>";
 
@@ -1016,13 +1024,34 @@
       out.textContent = "Sending…";
       out.hidden = false;
 
-      // No backend yet: confirms locally only. POST to your CRM here.
-      setTimeout(function () {
+      function done() {
         out.textContent = "Thanks! Your link-gap analysis for " + d +
           " is queued. We will email it within 72 hours.";
         btn.disabled = false;
         form.reset();
-      }, 900);
+      }
+      function failSend(text) {
+        btn.disabled = false;
+        out.classList.add("is-err");
+        out.textContent = text || "Something went wrong sending your request. Please email us instead.";
+      }
+
+      // WordPress: window.TB.ajax is printed by the theme. The static site has
+      // no backend, so it only confirms locally.
+      if (window.TB && window.TB.ajax && window.fetch && window.FormData) {
+        var data = new FormData(form);
+        data.set("domain", d);
+        data.append("action", "tb_lead");
+        fetch(window.TB.ajax, { method: "POST", body: data, credentials: "same-origin" })
+          .then(function (r) { return r.json().catch(function () { return null; }); })
+          .then(function (res) {
+            if (res && res.success) return done();
+            failSend(res && res.data && res.data.message);
+          })
+          .catch(function () { failSend(); });
+        return;
+      }
+      setTimeout(done, 900);
     });
 
     form.addEventListener("input", function (e) {
